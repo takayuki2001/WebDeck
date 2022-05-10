@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <DebugType>none</DebugType>
+    <Authors>ItabashiTakayuki</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ABC.bmp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.4" />
+    <PackageReference Include="ZXing.Net" Version="0.16.7" />
+    <PackageReference Include="ZXing.Net.Bindings.ImageSharp" Version="0.16.12" />
+  </ItemGroup>
+
+</Project>
