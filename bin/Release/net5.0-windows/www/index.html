@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Boostrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>WebDeck</title>
+</head>
+
+<body onload="loadEnd();">
+  <div class="container">
+    <div class="row">
+      <h3>HelloWebDeck</h3>
+    </div>
+    <div class="row">
+      <div class="col-1 d-flex align-items-center">
+        <h1 id="previousBtn" onclick="previousPage();">＜</h1>
+      </div>
+      <div class="col-10">
+        <div class="row">
+          <div class="col deckBtn" onclick="deckBtnClick(0);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+          <div class="col deckBtn" onclick="deckBtnClick(1);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+          <div class="col deckBtn" onclick="deckBtnClick(2);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+          <div class="col deckBtn" onclick="deckBtnClick(3);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col deckBtn" onclick="deckBtnClick(4);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+          <div class="col deckBtn" onclick="deckBtnClick(5);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+          <div class="col deckBtn" onclick="deckBtnClick(6);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+          <div class="col deckBtn" onclick="deckBtnClick(7);">
+            <img class="btnImg"/>
+            <h4 class="btnTitle">Title</h4>
+            <h5 class="btnDesc">Desc</h5>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-1 d-flex align-items-center">
+        <h1 id="nextBtn" onclick="nextPage();">＞</h1>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    function loadEnd() {
+      localStorage.setItem("IP",location.hostname);
+      localStorage.setItem("Port",location.port);
+      localStorage.setItem("Read","Skip");
+      ShowTopPage();
+    }
+
+    var btns=JSON.parse("{}");
+
+    function ShowTopPage() {
+
+      let request=new XMLHttpRequest();
+      request.open('GET','http://' + localStorage.getItem("IP") + ':' + localStorage.getItem("Port") + '/index.html?'+'REQTOP',false);
+      request.send('');
+
+      if(request.status===200) {
+        console.log(request.responseText);
+      }
+
+      btns=JSON.parse(request.responseText);
+
+      drawUpdate();
+    }
+
+    var deckBtns=document.getElementsByClassName("deckBtn");
+    var previousBtn=document.getElementById("previousBtn");
+    var nextBtn=document.getElementById("nextBtn");
+    var page=0;
+
+    function drawUpdate(){
+      let height = document.documentElement.clientHeight
+
+      for(let i=0;i<8;i++) {
+        if(btns.length>i+page*8) {
+          deckBtns[i].getElementsByClassName("btnTitle")[0].innerText=btns[i+page*8].Title;
+          deckBtns[i].getElementsByClassName("btnDesc")[0].innerText=btns[i+page*8].Cmd;
+          deckBtns[i].getElementsByClassName("btnImg")[0].src="data:image/png;base64,"+btns[i+page*8].Icon;
+          deckBtns[i].getElementsByClassName("btnImg")[0].style.height = height / 4 + "px";
+        }else{
+          deckBtns[i].getElementsByClassName("btnTitle")[0].innerText="";
+          deckBtns[i].getElementsByClassName("btnDesc")[0].innerText="";
+          deckBtns[i].getElementsByClassName("btnImg")[0].src="";
+        }
+      }
+
+      if(btns.length <= (page + 1) * 8){
+        nextBtn.hidden=true;
+      }else{
+        nextBtn.hidden=false;
+      }
+
+      if(btns.length > 8 && page > 0){
+        previousBtn.hidden=false;
+      }else{
+        previousBtn.hidden=true;
+      }
+
+    }
+
+    function nextPage(){
+      page++;
+      drawUpdate();
+    }
+
+    function previousPage(){
+      page--;
+      drawUpdate();
+    }
+
+    function deckBtnClick(btnIndex){
+
+      let cmd = deckBtns[btnIndex].getElementsByClassName("btnDesc")[0].innerText;
+
+      let request=new XMLHttpRequest();
+      request.open('GET','http://' + localStorage.getItem("IP") + ':' + localStorage.getItem("Port") + '/index.html?'+ cmd,false);
+      request.send('');
+
+      if(request.status===200) {
+        console.log(request.responseText);
+      }
+    }
+
+    window.onresize = drawUpdate;
+  </script>
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  </div>
+
+</html>

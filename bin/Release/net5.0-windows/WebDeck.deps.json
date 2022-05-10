@@ -1,0 +1,73 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "WebDeck/1.0.0": {
+        "dependencies": {
+          "SixLabors.ImageSharp": "1.0.4",
+          "ZXing.Net": "0.16.7",
+          "ZXing.Net.Bindings.ImageSharp": "0.16.12"
+        },
+        "runtime": {
+          "WebDeck.dll": {}
+        }
+      },
+      "SixLabors.ImageSharp/1.0.4": {
+        "runtime": {
+          "lib/netcoreapp3.1/SixLabors.ImageSharp.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.4.0"
+          }
+        }
+      },
+      "ZXing.Net/0.16.7": {
+        "runtime": {
+          "lib/net5.0/zxing.dll": {
+            "assemblyVersion": "0.16.7.0",
+            "fileVersion": "0.16.7.0"
+          }
+        }
+      },
+      "ZXing.Net.Bindings.ImageSharp/0.16.12": {
+        "runtime": {
+          "lib/netcoreapp3.1/ZXing.ImageSharp.dll": {
+            "assemblyVersion": "0.16.12.0",
+            "fileVersion": "0.16.12.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WebDeck/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SixLabors.ImageSharp/1.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-H2rPiEr2ddBOltOuqRYhpLBAsQXDAhbzMMhhuksnBG2oefup1MXMchALe7yYkKJksNbtxbZHKeM6dn/68I75qw==",
+      "path": "sixlabors.imagesharp/1.0.4",
+      "hashPath": "sixlabors.imagesharp.1.0.4.nupkg.sha512"
+    },
+    "ZXing.Net/0.16.7": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gmZxO4vRcqkdLhERYpzP3GK3T2bosoNqqIAf9kv+ipsB2ASpICK4YsAR0cfI6PDgC/HFGowJx3kHj8oyEN4R+w==",
+      "path": "zxing.net/0.16.7",
+      "hashPath": "zxing.net.0.16.7.nupkg.sha512"
+    },
+    "ZXing.Net.Bindings.ImageSharp/0.16.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-L5vftlWbXvtgTCIX1VzK6xyagCPnygIKnS5ClMectKE5CggAaGcYB7jDHT0V9tJA+Ef2wxpAUKk6P8S42rO17A==",
+      "path": "zxing.net.bindings.imagesharp/0.16.12",
+      "hashPath": "zxing.net.bindings.imagesharp.0.16.12.nupkg.sha512"
+    }
+  }
+}
